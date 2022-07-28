@@ -1,12 +1,14 @@
-import React, { FC, useState } from "react";
+import React, { FC, MouseEvent, useState } from "react";
 interface PokemonCardPropsI {
     name: string;
     img: string;
+    onClick: React.MouseEventHandler<HTMLDivElement>;
 }
-const PokemonCard: FC<PokemonCardPropsI> = ({ name, img }) => {
+
+const PokemonCard: FC<PokemonCardPropsI> = ({ name, img, onClick }) => {
     const [image, setImage] = useState<string | null>(null);
     return (
-        <div className="card-pokemon position-relative">
+        <div className="card-pokemon position-relative" onClick={onClick}>
             <img
                 src={image || img}
                 alt=""

@@ -1,10 +1,11 @@
-import type { GetStaticProps, NextPage } from 'next'
-import React from 'react'
-import Toast from '../components/alert/toast'
-import Layout from '../components/layout'
-import PokemonList from '../components/pages/pokemon/pokemon-list'
+import type { GetStaticProps, NextPage } from "next";
+import React from "react";
+import Toast from "../components/common/alert/toast";
+import Layout from "../components/layout";
+import PokemonList from "../components/pages/pokemon/pokemon-list";
+import pokemonProvider from "../providers/pokemon.provider";
 interface HomePropsI {
-  pokemonList: any
+  pokemonList: any;
 }
 const Home: NextPage<HomePropsI> = ({ pokemonList }) => {
   // useEffect(() => {
@@ -33,7 +34,6 @@ const Home: NextPage<HomePropsI> = ({ pokemonList }) => {
   //   }
   // }
 
-
   // const random = (min: number, max: number) => {
   //   return Math.floor((Math.random() * (max - min + 1)) + min);
   // }
@@ -46,26 +46,31 @@ const Home: NextPage<HomePropsI> = ({ pokemonList }) => {
 
   return (
     <React.Fragment>
-      <Layout>
-        <Toast />
-        <div className='mt-5'>-</div>
+      <Layout
+        rightSection={
+          <div className="menu">
+            <input type="text" v-model="inputSearch" placeholder="Search" />
+          </div>
+        }
+      >
+        {/* filterItems.length === 0" */}
+        {/* v-if="inputSearch.length > 0 && filterItems.length > 0" */}
+        <Toast text={"No hemos encontrado nada"} />
+        <div className="mt-5">-</div>
         <PokemonList pokemonArray={pokemonList?.results} />
-      </Layout >
-
-    </React.Fragment >
-  )
-}
+      </Layout>
+    </React.Fragment>
+  );
+};
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=100`);
-  const res = await data.json();
+  const data: any = await pokemonProvider.getPokemonList({ limit: 100, offset: 100 })
+
   return {
     props: {
-      pokemonList: res
-    }
-  }
-}
+      pokemonList: data?.data || null,
+    },
+  };
+};
 
-export default Home
-
-
+export default Home;

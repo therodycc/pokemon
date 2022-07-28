@@ -1,30 +1,18 @@
-import React, { useEffect, useState } from 'react'
-
-const PokemonPower = () => {
-
-    const [pokemon, setPokemon] = useState<any>(null);
-
-    useEffect(() => {
-        getTasks()
-    }, []);
-
-    let projects: any = []
-
-    const getTasks = async () => {
-        const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${25}`);
-        const res = await data.json();
-        setPokemon(res)
-    }
-
-    const experienceLevel = (index: number) => {
-        projects?.[index]?.base_experience < 100 && 'red';
-        projects?.[index]?.base_experience > 100 && projects[index].base_experience < 200 && 'yellow';
-        projects?.[index]?.base_experience > 200 && '#31c231';
-    }
+import { NextPage } from 'next'
+import React, { useEffect, useMemo, useState } from 'react'
+interface PokemonPowerPropsI {
+    pokemon: any
+}
+const PokemonPower: NextPage<PokemonPowerPropsI> = ({ pokemon }) => {
+    const experienceLevel = useMemo(() => {
+        if (pokemon?.base_experience < 100) return 'red';
+        if (pokemon?.base_experience > 100 && pokemon?.base_experience < 200) return 'yellow';
+        if (pokemon?.base_experience > 200) return '#31c231';
+    }, [pokemon])
 
     return (
         <React.Fragment>
-            <div className="present" key="index">
+            <div className="present">
                 <img src={pokemon?.sprites?.other?.dream_world?.front_default} />
                 <div className="content-present">
                     <img src={pokemon?.sprites?.other?.dream_world?.front_default} alt="" />
@@ -36,7 +24,7 @@ const PokemonPower = () => {
                                 className="load"
                                 style={{
                                     width: `${pokemon?.base_experience * 0.37}%`,
-                                    backgroundColor: `${experienceLevel(1)}`
+                                    backgroundColor: `${experienceLevel}`
                                 }} />
                         </div>
                     </div>

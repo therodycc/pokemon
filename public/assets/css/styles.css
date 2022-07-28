@@ -92,11 +92,10 @@ header {
 
 .present {
   width: 100%;
-  height: 600px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10vh;
+  margin-top: 150px;
 }
 
 .content-present {
