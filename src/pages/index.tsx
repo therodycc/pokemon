@@ -1,12 +1,11 @@
 import type { GetStaticProps, NextPage } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import Toast from "../components/common/alert/toast";
 import Layout from "../components/layout";
 import PokemonList from "../components/pages/pokemon/pokemon-list";
+import { HomePropsI, PokemonI } from "../interfaces/pokemon/pokemon.interface";
 import pokemonProvider from "../providers/pokemon.provider";
-interface HomePropsI {
-  pokemonList: any;
-}
+
 const Home: NextPage<HomePropsI> = ({ pokemonList }) => {
   // useEffect(() => {
   //   getTasks()
@@ -39,7 +38,7 @@ const Home: NextPage<HomePropsI> = ({ pokemonList }) => {
   // }
 
   // const filterItems = () => {
-  //   return pokemonArray.filter((item: any) => {
+  //   return pokemonArray.filter((item) => {
   //     return item.name.match(inputSearch.toLowerCase())
   //   })
   // }
@@ -64,11 +63,10 @@ const Home: NextPage<HomePropsI> = ({ pokemonList }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data: any = await pokemonProvider.getPokemonList({ limit: 100, offset: 100 })
-
+  const data = await pokemonProvider.getPokemonList({ limit: 100, offset: 100 })
   return {
     props: {
-      pokemonList: data?.data || null,
+      pokemonList: data,
     },
   };
 };

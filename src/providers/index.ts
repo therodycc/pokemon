@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import { ResponseProviderI } from "../interfaces/response";
 
 export interface ObjectKeyDynamicI {
     [key: string]: string | number
@@ -25,37 +26,37 @@ class Provider {
         }).join("&");
     }
 
-    protected get(url: string, params: any = {}, config: AxiosRequestConfig = {}) {
+    protected get<D, ParamsI = {}>(url: string, params?: ParamsI, config: AxiosRequestConfig = {}): Promise<D> {
         return new Promise((resolve) => {
             let hasQuery = url.includes("?");
-            this.axios.get(`${url}${!hasQuery ? `?${this.params(params)}` : ``}`, config)
+            this.axios.get(`${url}${!hasQuery ? `?${this.params(params || {})}` : ``}`, config)
+                .then(response => resolve(response?.data))
+                .catch(error => resolve(error?.response?.data));
+        });
+    }
+
+    protected post<ParamsI>(url: string, data: object = {}, config: AxiosRequestConfig = {}, params?: ParamsI) {
+        return new Promise((resolve) => {
+            let hasQuery = url.includes("?");
+            this.axios.post(`${url}${!hasQuery ? `?${this.params(params || {})}` : ``}`, data, config)
                 .then(response => resolve(response))
                 .catch(error => resolve(error?.response?.data));
         });
     }
 
-    protected post(url: string, data: object = {}, config: AxiosRequestConfig = {}, params: any = {}) {
+    protected update<ParamsI>(url: string, data: object = {}, config: AxiosRequestConfig = {}, params?: ParamsI) {
         return new Promise((resolve) => {
             let hasQuery = url.includes("?");
-            this.axios.post(`${url}${!hasQuery ? `?${this.params(params)}` : ``}`, data, config)
+            this.axios.patch(`${url}${!hasQuery ? `?${this.params(params || {})}` : ``}`, data, config)
                 .then(response => resolve(response))
                 .catch(error => resolve(error?.response?.data));
         });
     }
 
-    protected update(url: string, data: object = {}, config: AxiosRequestConfig = {}, params: any = {}) {
+    protected delete<ParamsI>(url: string, config: AxiosRequestConfig = {}, params?: ParamsI) {
         return new Promise((resolve) => {
             let hasQuery = url.includes("?");
-            this.axios.patch(`${url}${!hasQuery ? `?${this.params(params)}` : ``}`, data, config)
-                .then(response => resolve(response))
-                .catch(error => resolve(error?.response?.data));
-        });
-    }
-
-    protected delete(url: string, config: AxiosRequestConfig = {}, params: any = {}) {
-        return new Promise((resolve) => {
-            let hasQuery = url.includes("?");
-            this.axios.delete(`${url}${!hasQuery ? `?${this.params(params)}` : ``}`, config)
+            this.axios.delete(`${url}${!hasQuery ? `?${this.params(params || {})}` : ``}`, config)
                 .then(response => resolve(response))
                 .catch(error => resolve(error?.response?.data));
         });

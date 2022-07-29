@@ -1,13 +1,13 @@
 import { NextPage } from 'next'
-import React, { useEffect, useMemo, useState } from 'react'
-interface PokemonPowerPropsI {
-    pokemon: any
-}
+import React, { useMemo } from 'react'
+import { PokemonPowerPropsI } from '../../../interfaces/pokemon/pokemon.interface'
+
 const PokemonPower: NextPage<PokemonPowerPropsI> = ({ pokemon }) => {
+
     const experienceLevel = useMemo(() => {
-        if (pokemon?.base_experience < 100) return 'red';
-        if (pokemon?.base_experience > 100 && pokemon?.base_experience < 200) return 'yellow';
-        if (pokemon?.base_experience > 200) return '#31c231';
+        return (pokemon?.base_experience < 100) ? 'red'
+            : (pokemon?.base_experience > 100 && pokemon?.base_experience < 200)
+                ? 'yellow' : 'green'
     }, [pokemon])
 
     return (

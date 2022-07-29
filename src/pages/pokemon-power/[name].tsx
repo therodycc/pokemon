@@ -5,19 +5,15 @@ import pokemonProvider from '../../providers/pokemon.provider';
 import Layout from '../../components/layout/index';
 import ButtonCircle from '../../components/common/button/button-circle';
 import { useRouter } from 'next/router';
-interface PokemonPowerPagePropsI {
-    pokemon: any
-}
+import { PokemonPowerPagePropsI, SpecifyPokemonI } from '../../interfaces/pokemon/pokemon.interface';
+
 const PokemonPowerPage: NextPage<PokemonPowerPagePropsI> = ({ pokemon }) => {
     const router = useRouter()
     return (
         <React.Fragment>
             <Layout rightSection={
-                <ButtonCircle props={{
-
-                }} onClick={() => {
-                    router.push(`/`)
-                }} >
+                <ButtonCircle
+                    onClick={() => { router.push(`/`) }} >
                     <i className="fa fa-arrow-left"></i>
                 </ButtonCircle>
             }>
@@ -28,9 +24,9 @@ const PokemonPowerPage: NextPage<PokemonPowerPagePropsI> = ({ pokemon }) => {
 }
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
-    const data: any = await pokemonProvider.getPokemon(params!.name as string)
+    const data = await pokemonProvider.getPokemon(params!.name as string)
 
-    if (!data?.data) {
+    if (!data) {
         return {
             redirect: {
                 destination: '/',
@@ -38,10 +34,10 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
             }
         }
     }
-    console.log({ data });
+
     return {
         props: {
-            pokemon: data?.data
+            pokemon: data
         }
     }
 }

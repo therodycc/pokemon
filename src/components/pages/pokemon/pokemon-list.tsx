@@ -1,10 +1,8 @@
 import { useRouter } from 'next/router'
 import React, { FC } from 'react'
+import { PokemonListPropsI } from '../../../interfaces/pokemon/pokemon.interface'
 import PokemonCard from '../../common/card/pokemon-card'
 
-interface PokemonListPropsI {
-    pokemonArray: any
-}
 const PokemonList: FC<PokemonListPropsI> = ({ pokemonArray }) => {
     const router = useRouter()
 
@@ -13,11 +11,10 @@ const PokemonList: FC<PokemonListPropsI> = ({ pokemonArray }) => {
         return url.split('/')[range];
     }
 
-
     return (
         <React.Fragment>
             <div className="container mt-5 m-auto row justify-content-center" >
-                {pokemonArray?.map((pokemon: any) => (
+                {pokemonArray?.map((pokemon) => (
                     <PokemonCard
                         onClick={() => { router.push(`/pokemon-power/${pokemon.name}`) }}
                         key={pokemon.name + "-key"}
