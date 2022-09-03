@@ -10,7 +10,6 @@ const PokemonList: FC<PokemonListPropsI> = ({ pokemonArray }) => {
         let range = url.split('/').length - 2;
         return url.split('/')[range];
     }
-
     return (
         <React.Fragment>
             <div className="container mt-5 m-auto row justify-content-center" >

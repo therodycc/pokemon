@@ -1,9 +1,10 @@
 import type { GetStaticProps, NextPage } from "next";
-import React, { useEffect } from "react";
+import React from "react";
 import Toast from "../components/common/alert/toast";
+import Search from "../components/common/search";
 import Layout from "../components/layout";
 import PokemonList from "../components/pages/pokemon/pokemon-list";
-import { HomePropsI, PokemonI } from "../interfaces/pokemon/pokemon.interface";
+import { HomePropsI } from "../interfaces/pokemon/pokemon.interface";
 import pokemonProvider from "../providers/pokemon.provider";
 
 const Home: NextPage<HomePropsI> = ({ pokemonList }) => {
@@ -45,13 +46,7 @@ const Home: NextPage<HomePropsI> = ({ pokemonList }) => {
 
   return (
     <React.Fragment>
-      <Layout
-        rightSection={
-          <div className="menu">
-            <input type="text" v-model="inputSearch" placeholder="Search" />
-          </div>
-        }
-      >
+      <Layout rightSection={<Search />} >
         {/* filterItems.length === 0" */}
         {/* v-if="inputSearch.length > 0 && filterItems.length > 0" */}
         <Toast text={"No hemos encontrado nada"} />
