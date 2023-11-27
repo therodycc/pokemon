@@ -11,7 +11,7 @@ class PokemonProvider extends Provider {
     }
 
     getPokemonList(params: { limit?: number, offset?: number } = { limit: 10, offset: 0 }): Promise<PokemonI> {
-        return this.get<PokemonI, { limit?: number, offset?: number }>("pokemon", { ...params });
+        return this.get<PokemonI, { limit?: number, offset?: number }>("pokemon", { ...params, offset: params.offset * params.limit });
     }
 
 }

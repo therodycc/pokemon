@@ -7,7 +7,7 @@ interface HeaderPropsI {
 const Header: FC<HeaderPropsI> = ({ rightSection }) => {
     return (
         <React.Fragment>
-            <header style={{ position: "fixed", top: "0", left: 0 }}>
+            <header className="header-pokemon">
                 <div className="nav position-relative d-flex justify-content-end container" style={{
 
                 }}>
@@ -33,6 +33,11 @@ const Header: FC<HeaderPropsI> = ({ rightSection }) => {
                     <div>
                         {rightSection}
                     </div>
+                </div>
+
+                <div style={{width:'70%', margin:"auto"}}>
+                    <h1 style={{fontSize:"5rem"}}>POK</h1>
+                    <p style={{fontSize:'25px'}}>Una de las mejores paginas de pokemones</p>
                 </div>
                 {/* <svg
 

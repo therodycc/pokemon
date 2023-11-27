@@ -3,7 +3,7 @@ export interface PokemonPowerPagePropsI {
 }
 
 export interface PokemonListPropsI {
-    pokemonArray: ResultPokemonI[]
+
 }
 
 export interface HomePropsI {

@@ -7,7 +7,7 @@ import PokemonList from "../components/pages/pokemon/pokemon-list";
 import { HomePropsI } from "../interfaces/pokemon/pokemon.interface";
 import pokemonProvider from "../providers/pokemon.provider";
 
-const Home: NextPage<HomePropsI> = ({ pokemonList }) => {
+const Home: NextPage<HomePropsI> = () => {
   // useEffect(() => {
   //   getTasks()
   // }, []);
@@ -44,21 +44,22 @@ const Home: NextPage<HomePropsI> = ({ pokemonList }) => {
   //   })
   // }
 
+
   return (
     <React.Fragment>
       <Layout rightSection={<Search />} >
         {/* filterItems.length === 0" */}
         {/* v-if="inputSearch.length > 0 && filterItems.length > 0" */}
         <Toast text={"No hemos encontrado nada"} />
-        <div className="mt-5">-</div>
-        <PokemonList pokemonArray={pokemonList?.results} />
+        <PokemonList />
       </Layout>
     </React.Fragment>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await pokemonProvider.getPokemonList({ limit: 100, offset: 100 })
+  const data = await pokemonProvider.getPokemonList({ limit: 10, offset: 0 })
+  console.log(`🪲 | ----->   data`, data)
   return {
     props: {
       pokemonList: data,

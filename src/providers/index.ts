@@ -11,9 +11,9 @@ class Provider {
     constructor(api: string, config: AxiosRequestConfig = {}, headers = {}) {
         this.axios = axios.create({
             baseURL: api,
-            withCredentials: true,
+            // withCredentials: true,
+            headers,
             ...config,
-            headers
         });
     }
 

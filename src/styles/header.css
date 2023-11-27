@@ -1,0 +1,11 @@
+.header-pokemon {
+    background: #1e3c72;
+    height: 100%;
+    z-index: 10;
+    padding-bottom: 50px;
+    background: linear-gradient(to right, #ffffffcb , #7b241c2b),
+        url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/5.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}

@@ -1,25 +1,36 @@
-import React, { FC, MouseEvent, useState } from "react";
+import React, { FC, MouseEvent, useCallback, useState } from "react";
 interface PokemonCardPropsI {
     name: string;
     img: string;
     onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
+function addSuspensivePoints(text: string, maxLength: number) {
+    if (text.length > maxLength) {
+        return text.substring(0, maxLength) + '...';
+    } else {
+        return text;
+    }
+}
+
 const PokemonCard: FC<PokemonCardPropsI> = ({ name, img, onClick }) => {
     const [image, setImage] = useState<string | null>(null);
+
+
+    const getImageByEmpty = useCallback(() => {
+        setImage("/assets/img/not_found.jpeg");
+    }, [],)
+
     return (
-        <div className="card-pokemon position-relative" onClick={onClick}>
+        <div className={"card-pokemon"} onClick={onClick}>
             <img
+                className={"card-pokemon-img"}
                 src={image || img}
                 alt=""
-                onError={() => {
-                    setImage(
-                        "https://static-wp-tor15-prd.torcedores.com/wp-content/uploads/2016/08/pokeball-divulgacao.jpg"
-                    );
-                }}
+                onError={getImageByEmpty}
             />
-            <div className="pokemon-card-circle" />
-            <h3 className="pokemon-card-name">{name}</h3>
+            <div className={"pokemon-card-circle"} />
+            <h3 className={'pokemon-card-name'}>{addSuspensivePoints(name, 13)}</h3>
         </div>
     );
 };

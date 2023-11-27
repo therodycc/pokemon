@@ -4,14 +4,20 @@
     margin: 10px;
     border-radius: 20px;
     overflow: hidden;
+    position: relative;
     padding: 0;
     background-color: #FDEDEC;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.192);
     cursor: pointer;
 }
 
+.card-pokemon:hover {
+    transform: scale(0.8) rotate(10deg);
 
-.card-pokemon img {
+}
+
+
+.card-pokemon-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -41,7 +47,7 @@
 }
 
 
-.btn-circle{
+.btn-circle {
     width: 60px;
     height: 60px;
     border-radius: 50%;
