@@ -9,8 +9,11 @@ const Layout: FC<LayoutPropsI> = ({ children, rightSection }) => {
         <React.Fragment>
             <div>
                 <Header
-                    rightSection={rightSection} />
-                {children}
+                    rightSection={rightSection}
+                />
+                <div className="pokemon-home">
+                    {children}
+                </div>
             </div>
         </React.Fragment>
     );

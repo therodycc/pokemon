@@ -5,8 +5,7 @@ import { getPokemons } from '../../../redux/slices/pokemons/pokemons.actions'
 import { pokemonsSelector } from '../../../redux/slices/pokemons/pokemons.selector'
 import { useDispatch, useSelector } from '../../../redux/store'
 import PokemonCard from '../../common/card/pokemon-card'
-import { Pagination } from '../../common/pagination/pagination'
-import { Pagination2 } from '../../common/pagination/pagination-2'
+import { Pagination } from '../../common/pagination'
 
 const PokemonList: FC<PokemonListPropsI> = () => {
     const router = useRouter()
@@ -27,11 +26,9 @@ const PokemonList: FC<PokemonListPropsI> = () => {
 
     return (
         <React.Fragment>
-            <div className="container row justify-content-center" style={{ margin: 'auto', marginTop: -30, }}>
+            <div className="container row justify-content-center" style={{ margin: 'auto' }}>
                 <div className='d-flex justify-content-end'>
-                    {/* <h1>{page}</h1> */}
-                    <Pagination page={page} setPage={setPage} count={count} />
-                    <Pagination2 />
+                    <Pagination setPage={setPage} page={page} />
                 </div>
                 {pokemons?.map((pokemon) => (
                     <PokemonCard

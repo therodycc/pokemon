@@ -11,7 +11,7 @@ const PokemonPower: NextPage<PokemonPowerPropsI> = ({ pokemon }) => {
     }, [pokemon])
 
     return (
-        <React.Fragment>
+        <div>
             <div className="present">
                 <img src={pokemon?.sprites?.other?.dream_world?.front_default} />
                 <div className="content-present">
@@ -52,7 +52,7 @@ const PokemonPower: NextPage<PokemonPowerPropsI> = ({ pokemon }) => {
                     </div>
                 </div>
             </div>
-        </React.Fragment>
+        </div>
     )
 }
 
