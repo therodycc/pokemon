@@ -11,7 +11,7 @@ const Layout: FC<LayoutPropsI> = ({ children, rightSection }) => {
                 <Header
                     rightSection={rightSection}
                 />
-                <div className="pokemon-home">
+                <div className="pokemon-home bg-white">
                     {children}
                 </div>
             </div>

@@ -1,6 +1,6 @@
 .header-pokemon {
     background: #1e3c72;
-    height: 100%;
+    height: 500px;
     z-index: 10;
     padding-bottom: 50px;
     background: linear-gradient(to right, #ffffffcb , #7b241c2b),
@@ -8,4 +8,6 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    z-index: 90000;
 }
+

@@ -83,6 +83,11 @@ header {
     align-items: center;
 }
 
+.hover-search:hover {
+    background-color: #7B241C;
+    color: white;
+    cursor: pointer;
+}
 
 .pokemon-home {
     box-shadow: 30px 41px 200px 202px white;

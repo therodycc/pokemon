@@ -59,7 +59,6 @@ const Home: NextPage<HomePropsI> = () => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await pokemonProvider.getPokemonList({ limit: 10, offset: 0 })
-  console.log(`🪲 | ----->   data`, data)
   return {
     props: {
       pokemonList: data,
