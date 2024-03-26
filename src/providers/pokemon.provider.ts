@@ -10,8 +10,8 @@ class PokemonProvider extends Provider {
         return this.get<SpecifyPokemonI>(`pokemon/${name}`);
     }
 
-    getPokemonList(params: { limit?: number, offset?: number } = { limit: 10, offset: 0 }): Promise<PokemonI> {
-        return this.get<PokemonI, { limit?: number, offset?: number }>("pokemon", { ...params, offset: params.offset * params.limit });
+    getPokemonList(params: { limit: number, offset: number } = { limit: 10, offset: 0 }): Promise<PokemonI> {
+        return this.get<PokemonI, { limit?: number, offset?: number }>("pokemon", { ...params, offset: params?.offset * params.limit });
     }
 
 }
