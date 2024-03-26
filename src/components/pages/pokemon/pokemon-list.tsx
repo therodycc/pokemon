@@ -16,13 +16,8 @@ const PokemonList: FC<PokemonListPropsI> = () => {
     const [page, setPage] = useState<number>(0);
 
     useEffect(() => {
-        dispatch(getPokemons({ limit: 10, offset: page }))
+        dispatch(getPokemons({ limit: 12, offset: page }))
     }, [dispatch, page]);
-
-    const getImagePokemon = (url: string) => {
-        let range = url.split('/').length - 2;
-        return url.split('/')[range];
-    }
 
     return (
         <React.Fragment>
@@ -32,7 +27,7 @@ const PokemonList: FC<PokemonListPropsI> = () => {
                 </div>
                 {pokemons?.map((pokemon) => (
                     <PokemonCard
-                        onClick={() => { router.push(`/pokemon-power/${pokemon.name}`) }}
+                        onClick={() => router.push(`/pokemon-power/${pokemon.name}`)}
                         key={pokemon.name + "-key"}
                         name={pokemon?.name}
                         img={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${getImagePokemon(pokemon?.url)}.svg`}
@@ -41,6 +36,11 @@ const PokemonList: FC<PokemonListPropsI> = () => {
             </div>
         </React.Fragment>
     )
+}
+
+const getImagePokemon = (url: string) => {
+    let range = url.split('/').length - 2;
+    return url.split('/')[range];
 }
 
 export default PokemonList

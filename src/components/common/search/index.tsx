@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import useDebounce from '../../../hooks/useDebounce';
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from 'react';
+import pokemons from '../../../../pokemons.json';
+import Toast from "../alert/toast";
 import Input from '../input';
-import pokemons from '../../../../pokemons.json'
 
 const Search = () => {
+    const router = useRouter()
     const [search, setSearch] = useState("");
-
     const [filtered, setFiltered] = useState<string[]>([]);
 
     useEffect(() => {
@@ -17,7 +18,7 @@ const Search = () => {
     }
 
     const handleSearch = (pokemon: string) => {
-        console.log(`🪲  ======>  | pokemon:`, pokemon)
+        router.push(`/pokemon-power/${pokemon}`)
     }
 
     return (
@@ -28,15 +29,17 @@ const Search = () => {
                 value={search}
                 onChange={handleChange}
             />
-            {search && <div className="position-absolute bg-white p-2 shadow overflow-scroll" style={{ maxHeight: "400px", width: "300px" }}>
-                {filtered.map((x) => (
-                    <>
-                        <div className="p-3 rounded hover-search" onClick={() => handleSearch(x)}>
-                            <p className="mb-0">{x}</p>
-                        </div>
-                    </>
-                ))}
-            </div>}
+            {!!(search && filtered.length)
+                && <div className="position-absolute bg-white p-2 shadow overflow-scroll" style={{ maxHeight: "400px", width: "300px" }}>
+                    {filtered?.map((x) => (
+                        <>
+                            <div className="p-3 rounded hover-search" onClick={() => handleSearch(x)}>
+                                <p className="mb-0">{x}</p>
+                            </div>
+                        </>
+                    ))}
+                    {!!(search && filtered.length === 0) && <Toast text={"No hemos encontrado nada"} />}
+                </div>}
         </React.Fragment>
     )
 }
