@@ -17,10 +17,73 @@
 
 
 .pagination {
-    width: 400px;
-    height: 60px;
-    border-radius: 9px;
+    width: min(100%, 560px);
+    flex-direction: column;
+    gap: 8px;
+    padding: 6px 0;
+}
+
+.pagination__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    max-width: 100%;
+}
+
+.pagination__ellipsis {
+    width: 24px;
+    color: #8a7a77;
+    text-align: center;
+    user-select: none;
+}
+
+.pagination__jump {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #6b5551;
+}
+
+.pagination__jump input {
+    width: 84px;
+    height: 32px;
+    padding: 0 8px;
+    border: 1px solid var(--color-secondary);
+    border-radius: 8px;
+    outline: none;
+}
+
+.pagination__jump input:focus-visible,
+.pagination button:focus-visible {
+    outline: 2px solid #7b241c;
+    outline-offset: 2px;
+}
+
+.pagination__go {
+    height: 32px;
+    padding: 0 14px;
+    border: none;
+    border-radius: 8px;
+    background: #7b241c;
+    color: #fff;
+    cursor: pointer;
+}
+
+.pagination__go:disabled,
+.pagination__button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination__sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
     overflow: hidden;
+    clip: rect(0 0 0 0);
 }
 
 .pagination__item > button.active {
@@ -43,16 +106,14 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
-    width: 350;
-    height: 50px;
-    border-radius: 9px;
-    margin: 0 9px;
-    overflow: hidden;
+    flex-wrap: nowrap;
+    height: auto;
+    margin: 0 4px;
 }
 
 .pagination__item {
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    min-height: 44px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -80,8 +141,8 @@
 }
 
 .pagination__item>button {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
 }
 
 .pagination__item>button[data-level=target] {
@@ -105,8 +166,8 @@
 }
 
 .pagination__button {
-    width: 35px;
-    height: 35px;
+    width: 36px;
+    height: 36px;
 }
 
 @-webkit-keyframes pagination-move-prev {

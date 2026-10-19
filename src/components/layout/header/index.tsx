@@ -1,8 +1,10 @@
 import React, { FC, ReactNode, useEffect, useState } from "react";
 interface HeaderPropsI {
     rightSection: ReactNode;
+    heroContent?: ReactNode;
+    backgroundImage?: string;
 }
-const Header: FC<HeaderPropsI> = ({ rightSection }) => {
+const Header: FC<HeaderPropsI> = ({ rightSection, heroContent, backgroundImage }) => {
     const [isSticky, setIsSticky] = useState(false);
 
     useEffect(() => {
@@ -17,15 +19,17 @@ const Header: FC<HeaderPropsI> = ({ rightSection }) => {
 
     return (
         <React.Fragment>
-            <header className="header-pokemon ">
-                <div className={`${isSticky ? "bg-white shadow-sm" : ""} w-100 position-fixed`} style={{
+            <header
+                className={`header-pokemon ${heroContent ? "header-pokemon--detail" : ""}`}
+                style={backgroundImage ? ({ "--header-image": `url("${backgroundImage}")` } as React.CSSProperties) : undefined}
+            >
+                <div className={`${isSticky ? "bg-white shadow-sm" : ""} w-100 position-fixed header-bar`} style={{
                     zIndex: 9000
                 }}>
-                    <nav className="container d-flex justify-content-between">
+                    <nav className="container d-flex align-items-center justify-content-between header-nav">
                         <div
-                            className="logo d-flex align-items-center"
+                            className="logo d-flex align-items-center header-logo"
                             style={{
-                                padding: "20px 90px",
                                 borderTopLeftRadius: "500px",
                                 borderBottomRightRadius: "500px",
                                 ...(!isSticky && { background: "#7B241C" }),
@@ -34,18 +38,20 @@ const Header: FC<HeaderPropsI> = ({ rightSection }) => {
                             <img src="/assets/img/logo.jpg" className="rounded-circle" alt="" />
                             <h1 style={{ ...(isSticky ? { color: "#773a33" } : { color: "#ff7162" }) }}>Pokemon</h1>
                         </div>
-                        <div className="p-4">{rightSection}</div>
+                        <div className="header-actions">{rightSection}</div>
                     </nav>
                 </div>
-                <div style={{ padding: "200px 0" }}>
-
-                    <div style={{ width: "70%", margin: "auto" }}>
-                        <h1 style={{ fontSize: "5rem" }}>POK</h1>
-                        <p style={{ fontSize: "25px" }}>
-                            Una de las mejores paginas de pokemones
-                        </p>
-                    </div>
+                <div className={`header-hero ${heroContent ? "header-hero--detail" : ""}`} style={{ padding: "200px 0" }}>
+                    {heroContent ?? (
+                        <div className="header-hero-content" style={{ width: "70%", margin: "auto" }}>
+                            <h1 style={{ fontSize: "5rem" }}>POK</h1>
+                            <p style={{ fontSize: "25px" }}>
+                                Una de las mejores paginas de pokemones
+                            </p>
+                        </div>
+                    )}
                     <svg
+                        className="header-wave"
                         style={{
                             position: "fixed",
                             top: 0,

@@ -30,7 +30,7 @@ const Search = () => {
                 onChange={handleChange}
             />
             {!!(search && filtered.length)
-                && <div className="position-absolute bg-white p-2 shadow overflow-scroll" style={{ maxHeight: "400px", width: "300px" }}>
+                && <div className="search-suggestions">
                     {filtered?.map((x) => (
                         <>
                             <div className="p-3 rounded hover-search" onClick={() => handleSearch(x)}>

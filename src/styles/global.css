@@ -265,4 +265,33 @@ header {
         align-items: center;
         margin-top: 0vh;
     }
+
+    .pagination {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    .pagination__list {
+        margin: 0 4px;
+    }
+
+    .pagination__item {
+        width: 34px;
+        min-height: 36px;
+        font-size: 0.9rem;
+    }
+
+    .pagination__item > button {
+        width: 32px;
+        height: 34px;
+    }
+
+    .pagination__button {
+        width: 32px;
+        height: 34px;
+    }
+
+    .pagination__ellipsis {
+        width: 16px;
+    }
 }

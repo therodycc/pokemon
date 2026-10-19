@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from '../../../redux/store'
 import PokemonCard from '../../common/card/pokemon-card'
 import { Pagination } from '../../common/pagination'
 
+const PAGE_SIZE = 12
+
 const PokemonList: FC<PokemonListPropsI> = () => {
     const router = useRouter()
     const dispatch = useDispatch()
@@ -16,14 +18,14 @@ const PokemonList: FC<PokemonListPropsI> = () => {
     const [page, setPage] = useState<number>(0);
 
     useEffect(() => {
-        dispatch(getPokemons({ limit: 12, offset: page }))
+        dispatch(getPokemons({ limit: PAGE_SIZE, offset: page }))
     }, [dispatch, page]);
 
     return (
         <React.Fragment>
-            <div className="container row justify-content-center" style={{ margin: 'auto' }}>
-                <div className='d-flex justify-content-end'>
-                    <Pagination setPage={setPage} page={page} />
+            <div className="pokemon-list">
+                <div className="pokemon-list-pagination">
+                    <Pagination setPage={setPage} page={page} totalPages={Math.ceil((count || 0) / PAGE_SIZE)} />
                 </div>
                 {pokemons?.map((pokemon) => (
                     <PokemonCard
