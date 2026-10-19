@@ -1,4 +1,5 @@
 import { FC, useMemo } from "react";
+import Link from "next/link";
 import { SpecifyPokemonI } from "../../../interfaces/pokemon/pokemon.interface";
 
 // Referencia: Eternatus Eternamax, la mayor suma de estadísticas base (1125).
@@ -17,6 +18,12 @@ const AXES = [
     { key: "speed", label: "Velocidad" },
 ];
 
+const MAX_POKEDEX_ID = 1025;
+const FIRST_FORM_ID = 10001;
+
+// Las formas alternativas (id >= 10001) van en una secuencia aparte; si el id siguiente no existe, la página redirige al inicio.
+const getPrevId = (id: number) => (id === FIRST_FORM_ID ? MAX_POKEDEX_ID : id > 1 ? id - 1 : null);
+const getNextId = (id: number) => (id === MAX_POKEDEX_ID ? FIRST_FORM_ID : id + 1);
 const SIZE = 300;
 const CENTER = SIZE / 2;
 const RADIUS = 100;
@@ -39,6 +46,9 @@ const PokemonHeaderChart: FC<{ pokemon: SpecifyPokemonI }> = ({ pokemon }) => {
     const percent = Math.round((total / REFERENCE_TOTAL) * 100);
     const referenceRatios = AXES.map(({ key }) => REFERENCE.stats[key] / 255);
     const ratios = values.map((value) => Math.min(value / 255, 1));
+
+    const prevId = getPrevId(pokemon.id);
+    const nextId = getNextId(pokemon.id);
 
     return (
         <div className="header-chart">
@@ -75,6 +85,18 @@ const PokemonHeaderChart: FC<{ pokemon: SpecifyPokemonI }> = ({ pokemon }) => {
                     <li><i className="header-chart-key header-chart-key--pokemon" />{pokemon.name.replace(/-/g, " ")}</li>
                     <li><i className="header-chart-key header-chart-key--reference" />{REFERENCE.name}</li>
                 </ul>
+                <nav className="header-chart-nav" aria-label="Navegar entre Pokémon">
+                    {prevId ? (
+                        <Link href={`/pokemon-power/${prevId}`}>
+                            <a aria-label="Pokémon anterior">‹ N.º {String(prevId).padStart(3, "0")}</a>
+                        </Link>
+                    ) : (
+                        <span />
+                    )}
+                    <Link href={`/pokemon-power/${nextId}`}>
+                        <a aria-label="Pokémon siguiente">N.º {String(nextId).padStart(3, "0")} ›</a>
+                    </Link>
+                </nav>
             </div>
         </div>
     );
