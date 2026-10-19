@@ -2,9 +2,10 @@ import React, { FC, ReactNode, useEffect, useState } from "react";
 interface HeaderPropsI {
     rightSection: ReactNode;
     heroContent?: ReactNode;
+    leftContent?: ReactNode;
     backgroundImage?: string;
 }
-const Header: FC<HeaderPropsI> = ({ rightSection, heroContent, backgroundImage }) => {
+const Header: FC<HeaderPropsI> = ({ rightSection, heroContent, leftContent, backgroundImage }) => {
     const [isSticky, setIsSticky] = useState(false);
 
     useEffect(() => {
@@ -41,9 +42,10 @@ const Header: FC<HeaderPropsI> = ({ rightSection, heroContent, backgroundImage }
                         <div className="header-actions">{rightSection}</div>
                     </nav>
                 </div>
-                <div className={`header-hero ${heroContent ? "header-hero--detail" : ""}`} style={{ padding: "200px 0" }}>
+                <div className={`header-hero ${heroContent ? "header-hero--detail" : ""} ${leftContent ? "header-hero--with-left" : ""}`} style={{ padding: "200px 0" }}>
+                    {leftContent && <div className="header-left">{leftContent}</div>}
                     {heroContent ?? (
-                        <div className="header-hero-content" style={{ width: "70%", margin: "auto" }}>
+                        <div className="header-hero-content" style={leftContent ? undefined : { width: "70%", margin: "auto" }}>
                             <h1 style={{ fontSize: "5rem" }}>POK</h1>
                             <p style={{ fontSize: "25px" }}>
                                 Una de las mejores paginas de pokemones
